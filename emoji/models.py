@@ -116,8 +116,8 @@ class Emoji(object):
         if not cls._files:
             for f in os.listdir(cls._image_path):
                 if(not f.startswith('.') and
-                   os.path.isfile(os.path.join(cls._image_path, f))):
-                    cls._files.append(os.path.splitext(f)[0])
+                    os.path.isfile(os.path.join(cls._image_path, f))):
+                        cls._files.append(os.path.splitext(f)[0])
 
         return cls._files
 
@@ -128,8 +128,10 @@ class Emoji(object):
 
         def _replace_emoji(match):
             val = match.group(1)
-            if val in e:
-                return e._image_string(match.group(1))
+            if val in e:                
+                # return e._image_string(match.group(1))
+                # Set img alt as emoji's original code for better copy paste expirience
+                return e._image_string(match.group(1), alt=match.group(0))
             else:
                 return match.group(0)
 
